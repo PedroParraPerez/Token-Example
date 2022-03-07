@@ -27,7 +27,7 @@ class User(db.Model):
 
 class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(120), unique=False, nullable=False)
         
     country_id = db.Column(db.Integer, db.ForeignKey("country.id"), nullable = True)
     country = db.relationship("Country", backref=db.backref("cities", lazy = True))
@@ -41,10 +41,16 @@ class City(db.Model):
             "name": self.name,
             # do not serialize the password, its a security breach
         }
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+
+
 
 class Country(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(120), unique=False, nullable=False)
    
 
     def __repr__(self):

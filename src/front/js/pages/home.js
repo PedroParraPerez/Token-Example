@@ -9,26 +9,61 @@ export const Home = () => {
   
 
 useEffect(()=>{
-  CreateCountry() //Creamos un pais en la base de datos cada vez que refrescamos la pagina con el name de name: pero solo podemos poner un mismo pais una vez por que el valor no se puede repetir (Si se repite en la relacion, pero no en el listado, es decir, españa tiene muchas ciudades pero no existen dos españas)
+  CreateCity(city_name);
+  CreateCountry(country_name) //Creamos un pais en la base de datos cada vez que refrescamos la pagina con el name de name: pero solo podemos poner un mismo pais una vez por que el valor no se puede repetir (Si se repite en la relacion, pero no en el listado, es decir, españa tiene muchas ciudades pero no existen dos españas)
+  CreateCityWithCountry(id)
 }, [])
 
-let asd = "hola"
-const CreateCountry = () => {
+let country_name = "Francia"
+let city_name = "asd"
+
+
+
+const CreateCountry = (country) => {
   fetch(
-    "https://3001-pedroparraperez-tokenexa-1gdv6yaxh6q.ws-eu34xl.gitpod.io/api/countries/create",
+    "https://3001-pedroparraperez-tokenexa-47ocorhaqb8.ws-eu34xl.gitpod.io/api/countries/create",
     {
       method: "POST",
       body: JSON.stringify({
-        name: asd,
+        name: country,
       }),
       headers: {
         "Content-Type": "application/json",
       },
     }
-  ).then((response) => console.log(response));
+  ).then((response) => console.log(response + "Creado de paises"));
 
 }
+const CreateCity = (city) => {
+  fetch(
+    "https://3001-pedroparraperez-tokenexa-47ocorhaqb8.ws-eu34xl.gitpod.io/api/cities/create",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        name: city,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  ).then((response) => console.log(response + "Creado de ciudades"));
 
+}
+const CreateCityWithCountry = ( id) => {
+  fetch(
+    `https://3001-pedroparraperez-tokenexa-47ocorhaqb8.ws-eu34xl.gitpod.io/api//countries/${id}/cities/create`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        name: "",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  ).then((response) => console.log(response + "Creacion de ciudades con paises"));
+
+}
 
 
   return (
