@@ -1,23 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+// Con este Fetch lo que estamos creando gracias a la ruta que guardamos en country db.session.commit guardaremos el pais Prueba
+  
 
+useEffect(()=>{
+  CreateCountry() //Creamos un pais en la base de datos cada vez que refrescamos la pagina con el name de name: pero solo podemos poner un mismo pais una vez por que el valor no se puede repetir (Si se repite en la relacion, pero no en el listado, es decir, españa tiene muchas ciudades pero no existen dos españas)
+}, [])
+
+let asd = "hola"
+const CreateCountry = () => {
   fetch(
-    "https://3001-4geeksacademy-reactflask-wqkgc0obgup.ws-eu34xl.gitpod.io/api/countries/create",
+    "https://3001-pedroparraperez-tokenexa-1gdv6yaxh6q.ws-eu34xl.gitpod.io/api/countries/create",
     {
       method: "POST",
       body: JSON.stringify({
-        name: "Prueba",
+        name: asd,
       }),
       headers: {
         "Content-Type": "application/json",
       },
     }
   ).then((response) => console.log(response));
+
+}
+
+
 
   return (
     <div className="text-center mt-5">
