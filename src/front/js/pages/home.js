@@ -11,11 +11,12 @@ export const Home = () => {
 useEffect(()=>{
   CreateCity(city_name);
   CreateCountry(country_name) //Creamos un pais en la base de datos cada vez que refrescamos la pagina con el name de name: pero solo podemos poner un mismo pais una vez por que el valor no se puede repetir (Si se repite en la relacion, pero no en el listado, es decir, españa tiene muchas ciudades pero no existen dos españas)
-  CreateCityWithCountry(id)
+  CreateCityWithCountry(city_name2)
 }, [])
 
 let country_name = "Francia"
 let city_name = "asd"
+let city_name2 = "bogota"
 
 
 
@@ -49,13 +50,13 @@ const CreateCity = (city) => {
   ).then((response) => console.log(response + "Creado de ciudades"));
 
 }
-const CreateCityWithCountry = ( id) => {
+const CreateCityWithCountry = ( city) => {
   fetch(
-    `https://3001-pedroparraperez-tokenexa-47ocorhaqb8.ws-eu34xl.gitpod.io/api//countries/${id}/cities/create`,
+    `https://3001-pedroparraperez-tokenexa-47ocorhaqb8.ws-eu34xl.gitpod.io/api/countries/3/cities/create`,
     {
       method: "POST",
       body: JSON.stringify({
-        name: "",
+        name: city,
       }),
       headers: {
         "Content-Type": "application/json",

@@ -17,7 +17,7 @@ def get_json():
 
 def get_name(json):
     name = json.get("name")
-    if name is None or name == "":
+    if name is None:
         raise APIException("El nombre es obligatorio")
     return name
 
@@ -45,28 +45,33 @@ def create_countries():
 
 
 #Creamos las ciudades igual que los paises SIN UN PAIS ASIGNADO
-# @api.route('/cities/create', methods=['POST'])
-# def create_cities():
+@api.route('/cities/create', methods=['POST'])
+def create_cities():
 
-#     json = get_json()
+    json = get_json()
 
-#     name = json.get("name")
-#     city = City(name=name)
-#     city.save()
+    name = json.get("name")
+    city = City(name=name)
+    city.save()
 
-#     return jsonify(city.serialize()), 200
-
-
+    return jsonify(city.serialize()), 200
 
 
-# CREAMOS LAS CIUDADES CON UN PAIS YA ASIGNADO
+
+
+# CREAMOS LAS CIUDADES CON UN PAIS YA ASIGNADO FUNCIONA PERFECTO ASIGNANDOLE UN PAIS EN CONCRETO
 @api.route('/countries/<int:country_id>/cities/create', methods=['POST'])
 def create_city_in_country(country_id):
     json = get_json()
-    name = get_name()
+    name = get_name(json)
 
+    country = Country.query.get(country_id)
+    city = City(name=name)
 
+    country.cities.append(city)
+    country.save()
 
+    return jsonify(city.serialize()), 200
 
 
 
