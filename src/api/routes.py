@@ -17,7 +17,7 @@ def get_json():
 
 def get_name(json):
     name = json.get("name")
-    if name is None:
+    if name is None or name.strip() == "":
         raise APIException("El nombre es obligatorio")
     return name
 
@@ -34,6 +34,7 @@ def list_countries():
 def create_countries():
 
     json = get_json()
+    name = get_name(json)
 
     name = json.get("name")
     country = Country(name=name)
@@ -49,6 +50,7 @@ def create_countries():
 def create_cities():
 
     json = get_json()
+    name = get_name(json)
 
     name = json.get("name")
     city = City(name=name)

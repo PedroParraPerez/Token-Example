@@ -14,15 +14,15 @@ useEffect(()=>{
   CreateCityWithCountry(city_name2)
 }, [])
 
-let country_name = "Francia"
-let city_name = "asd"
-let city_name2 = "bogota"
+let country_name = "España"
+let city_name = "Ciudad sin ningun pais asignado"
+let city_name2 = "Ciudad con pais asignado"
 
 
 
 const CreateCountry = (country) => {
   fetch(
-    "https://3001-pedroparraperez-tokenexa-47ocorhaqb8.ws-eu34xl.gitpod.io/api/countries/create",
+    "https://3001-pedroparraperez-tokenexa-unmz80jotaw.ws-eu34xl.gitpod.io/api/countries/create",
     {
       method: "POST",
       body: JSON.stringify({
@@ -37,7 +37,7 @@ const CreateCountry = (country) => {
 }
 const CreateCity = (city) => {
   fetch(
-    "https://3001-pedroparraperez-tokenexa-47ocorhaqb8.ws-eu34xl.gitpod.io/api/cities/create",
+    "https://3001-pedroparraperez-tokenexa-unmz80jotaw.ws-eu34xl.gitpod.io/api/cities/create",
     {
       method: "POST",
       body: JSON.stringify({
@@ -52,7 +52,7 @@ const CreateCity = (city) => {
 }
 const CreateCityWithCountry = ( city) => {
   fetch(
-    `https://3001-pedroparraperez-tokenexa-47ocorhaqb8.ws-eu34xl.gitpod.io/api/countries/3/cities/create`,
+    `https://3001-pedroparraperez-tokenexa-unmz80jotaw.ws-eu34xl.gitpod.io/api/countries/3/cities/create`,
     {
       method: "POST",
       body: JSON.stringify({
